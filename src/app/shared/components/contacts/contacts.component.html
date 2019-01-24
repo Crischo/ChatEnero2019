@@ -1,0 +1,86 @@
+<nav *ngIf="refreshContactVisibleState()" class="chatspace" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('grupo1')">
+                <span><i class="fa fa-plus"></i>&nbsp; Comunidad Yavirac</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'grupo1'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/asistencia-registro']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            Todos
+                        </a>
+                    </li>
+                    <li>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtroComunidad">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-info col-12" (click)="searchPersonas()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-12 text-center" style="border-bottom-style: solid; border-width: 2px; border-color: white; color:white;">
+                            <strong>Encontrados:</strong>
+                        </div>
+                        <a *ngFor="let persona of personasFiltroComunidad" class="list-group-item">
+                            {{persona.nombre1}} {{persona.nombre2}} {{persona.apellido1}} {{persona.apellido2}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--     <div *ngFor="let carrera of carreras">
+            <a class="list-group-item" (click)="addExpandClass('grupo2')">
+               <span><i class="fa fa-plus"></i>&nbsp; {{carrera.nombre}}<span>
+               {{carrera.nombre}}
+            </a>
+        </div>
+        -->
+        
+      
+
+            <div *ngFor="let carrera of carreras" >
+                <a class="list-group-item"  (click)="addExpandClass(carrera.nombre)" >
+                    <span><i class="fa fa-plus"></i>&nbsp; {{carrera.nombre}}</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === carrera.nombre">
+                    <ul class="submenu">
+                        <li *ngFor="let sala of carrera.chats">
+                            <a (click)="salaSeleccionada(sala.nombre+' '+sala.id)"
+                                class="list-group-item" (click)="sumOperator.botonAbrir()">
+                                {{sala.nombre}}
+                        </a>
+                        </li>
+
+                        <!--
+                        <li>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-info col-12">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                   
+                        <li>
+                            <div class="col-12 text-center" style="border-bottom-style: solid; border-width: 2px; border-color: white; color:white;">
+                                <strong>Encontrados:</strong>
+                            </div>
+                            <a [routerLink]="['/asistencia-justificacion']" [routerLinkActive]="['router-link-active']"
+                                class="list-group-item">
+                                <img src="{{srcFoto}}" class="rounded-circle" width="30px">&nbsp; Luis Salazar
+                            </a>
+                        </li>
+                       -->
+                    </ul>
+                </li>
+            </div>
+        </div>
+    </ul>
+</nav>
+
+<app-chatspace #sumOperator></app-chatspace>
